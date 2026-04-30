@@ -365,7 +365,9 @@ h3 {
 
 .timeline-item p {
   margin: 0;
+  min-width: 0;
   font-weight: 800;
+  overflow-wrap: anywhere;
 }
 
 .stats-band {
@@ -813,6 +815,7 @@ h3 {
   background: rgba(15, 123, 104, 0.08);
   font-size: 14px;
   line-height: 1.65;
+  overflow-wrap: anywhere;
 }
 
 .error-message {
@@ -824,6 +827,7 @@ h3 {
   background: rgba(122, 51, 77, 0.08);
   font-size: 14px;
   line-height: 1.65;
+  overflow-wrap: anywhere;
 }
 
 .footer {
@@ -988,22 +992,31 @@ h3 {
   }
 
   .hero-visual {
-    min-height: 430px;
+    display: grid;
+    gap: 12px;
+    min-height: auto;
   }
 
   .hero-visual::before {
-    inset: 38px 0 40px 20px;
+    display: none;
+  }
+
+  .glass-panel {
+    position: static;
+    width: 100%;
   }
 
   .panel-main {
-    top: 58px;
-    right: 0;
-    width: 94%;
+    width: 100%;
     padding: 20px;
   }
 
   .score-line strong {
     font-size: 68px;
+  }
+
+  .timeline-item {
+    grid-template-columns: 42px minmax(0, 1fr);
   }
 
   .stats-band {
