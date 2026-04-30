@@ -22,7 +22,7 @@ Use the service role key only in Vercel environment variables. Do not put it in 
 
 1. Create a Resend API key.
 2. Verify the sending domain before production email.
-3. Set `RESEND_FROM_EMAIL`, for example `天财保宝 <consult@study.tiancaibaobao.com>`.
+3. Set `RESEND_FROM_EMAIL`, for example `天财保宝 <consult@mail.tiancaibaobao.com>`.
 4. Set `LEAD_NOTIFY_EMAIL` to `yi7710812@gmail.com`.
 
 ## Vercel Environment Variables
@@ -34,7 +34,7 @@ SUPABASE_URL=
 SUPABASE_SERVICE_ROLE_KEY=
 SUPABASE_LEADS_TABLE=leads
 RESEND_API_KEY=
-RESEND_FROM_EMAIL=天财保宝 <consult@study.tiancaibaobao.com>
+RESEND_FROM_EMAIL=天财保宝 <consult@mail.tiancaibaobao.com>
 LEAD_NOTIFY_EMAIL=yi7710812@gmail.com
 ```
 
@@ -50,6 +50,8 @@ LEAD_NOTIFY_EMAIL=yi7710812@gmail.com
 Add `study.tiancaibaobao.com` in Vercel Domains.
 
 Then add the DNS record requested by Vercel at your domain provider. It is usually a CNAME from `study` to Vercel's target.
+
+Use a separate subdomain such as `mail.tiancaibaobao.com` for Resend sending records so the website CNAME and email DNS records do not conflict.
 
 ## References
 
