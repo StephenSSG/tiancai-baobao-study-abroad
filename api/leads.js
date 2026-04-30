@@ -42,6 +42,15 @@ function hasMissingRequired(body = {}) {
   return requiredFields.some((field) => !String(body[field] || '').trim());
 }
 
+function hasValidSupabaseUrl(value) {
+  try {
+    const url = new URL(value);
+    return url.protocol === 'https:';
+  } catch {
+    return false;
+  }
+}
+
 function leadEmailText(lead) {
   return [
     '天财保宝官网收到新的预约评估线索：',
@@ -89,74 +98,84 @@ function leadEmailHtml(lead) {
 }
 
 export default async function handler(req, res) {
-  if (req.method === 'OPTIONS') {
-    res.status(204).end();
-    return;
-  }
-
-  if (req.method !== 'POST') {
-    res.status(405).json({ ok: false, error: 'Method not allowed' });
-    return;
-  }
-
-  if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
-    res.status(500).json({ ok: false, error: 'Supabase is not configured' });
-    return;
-  }
-
-  let body;
-
   try {
-    body = typeof req.body === 'string' ? JSON.parse(req.body || '{}') : req.body || {};
-  } catch {
-    res.status(400).json({ ok: false, error: 'Invalid JSON' });
-    return;
-  }
-
-  if (hasMissingRequired(body)) {
-    res.status(400).json({ ok: false, error: 'Missing required fields' });
-    return;
-  }
-
-  const lead = normalizeLead(body);
-  const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
-
-  const { data, error } = await supabase
-    .from(process.env.SUPABASE_LEADS_TABLE || 'leads')
-    .insert({
-      ...lead,
-      source: 'website',
-      metadata: {
-        user_agent: req.headers['user-agent'] || null,
-        referer: req.headers.referer || null,
-      },
-    })
-    .select('id')
-    .single();
-
-  if (error) {
-    console.error('Supabase lead insert failed:', error);
-    res.status(500).json({ ok: false, error: 'Failed to save lead' });
-    return;
-  }
-
-  let emailSent = false;
-
-  if (process.env.RESEND_API_KEY && process.env.LEAD_NOTIFY_EMAIL) {
-    try {
-      const resend = new Resend(process.env.RESEND_API_KEY);
-      await resend.emails.send({
-        from: process.env.RESEND_FROM_EMAIL || '天财保宝 <onboarding@resend.dev>',
-        to: process.env.LEAD_NOTIFY_EMAIL,
-        subject: '天财保宝官网新预约评估',
-        text: leadEmailText(lead),
-        html: leadEmailHtml(lead),
-      });
-      emailSent = true;
-    } catch (emailError) {
-      console.error('Resend notification failed:', emailError);
+    if (req.method === 'OPTIONS') {
+      res.status(204).end();
+      return;
     }
-  }
 
-  res.status(201).json({ ok: true, id: data.id, emailSent });
+    if (req.method !== 'POST') {
+      res.status(405).json({ ok: false, error: 'Method not allowed' });
+      return;
+    }
+
+    if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+      res.status(500).json({ ok: false, error: 'Supabase is not configured' });
+      return;
+    }
+
+    if (!hasValidSupabaseUrl(process.env.SUPABASE_URL)) {
+      res.status(500).json({ ok: false, error: 'Supabase URL is invalid' });
+      return;
+    }
+
+    let body;
+
+    try {
+      body = typeof req.body === 'string' ? JSON.parse(req.body || '{}') : req.body || {};
+    } catch {
+      res.status(400).json({ ok: false, error: 'Invalid JSON' });
+      return;
+    }
+
+    if (hasMissingRequired(body)) {
+      res.status(400).json({ ok: false, error: 'Missing required fields' });
+      return;
+    }
+
+    const lead = normalizeLead(body);
+    const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
+
+    const { data, error } = await supabase
+      .from(process.env.SUPABASE_LEADS_TABLE || 'leads')
+      .insert({
+        ...lead,
+        source: 'website',
+        metadata: {
+          user_agent: req.headers['user-agent'] || null,
+          referer: req.headers.referer || null,
+        },
+      })
+      .select('id')
+      .single();
+
+    if (error) {
+      console.error('Supabase lead insert failed:', error);
+      res.status(500).json({ ok: false, error: 'Failed to save lead' });
+      return;
+    }
+
+    let emailSent = false;
+
+    if (process.env.RESEND_API_KEY && process.env.LEAD_NOTIFY_EMAIL) {
+      try {
+        const resend = new Resend(process.env.RESEND_API_KEY);
+        await resend.emails.send({
+          from: process.env.RESEND_FROM_EMAIL || '天财保宝 <onboarding@resend.dev>',
+          to: process.env.LEAD_NOTIFY_EMAIL,
+          subject: '天财保宝官网新预约评估',
+          text: leadEmailText(lead),
+          html: leadEmailHtml(lead),
+        });
+        emailSent = true;
+      } catch (emailError) {
+        console.error('Resend notification failed:', emailError);
+      }
+    }
+
+    res.status(201).json({ ok: true, id: data.id, emailSent });
+  } catch (error) {
+    console.error('Lead API unhandled error:', error);
+    res.status(500).json({ ok: false, error: 'Lead API server error' });
+  }
 }
