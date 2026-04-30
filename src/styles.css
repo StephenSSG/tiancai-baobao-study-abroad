@@ -706,10 +706,10 @@ h3 {
 
 .wechat-box {
   display: grid;
-  grid-template-columns: 240px 1fr;
-  align-items: center;
-  gap: 18px;
-  max-width: 590px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 14px;
+  max-width: 620px;
   margin-top: 34px;
   padding: 16px;
   border: 1px solid var(--line);
@@ -717,9 +717,15 @@ h3 {
   background: rgba(255, 255, 255, 0.66);
 }
 
+.wechat-card {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
 .wechat-qr {
   display: block;
-  width: 240px;
+  width: 100%;
   aspect-ratio: 888 / 1191;
   object-fit: cover;
   object-position: center;
@@ -728,9 +734,21 @@ h3 {
   background: #fff;
 }
 
-.wechat-box p {
+.wechat-card p,
+.wechat-note {
   margin: 0;
   font-size: 14px;
+}
+
+.wechat-card p {
+  color: var(--ink);
+  font-weight: 800;
+}
+
+.wechat-note {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  line-height: 1.65;
 }
 
 .lead-form {
@@ -1044,12 +1062,15 @@ h3 {
   }
 
   .wechat-box {
-    align-items: flex-start;
     grid-template-columns: 1fr;
   }
 
   .wechat-qr {
     width: min(100%, 260px);
+  }
+
+  .wechat-note {
+    grid-column: auto;
   }
 
   .footer {

@@ -502,8 +502,15 @@ function App() {
             </p>
 
             <div className="wechat-box" aria-label="天财保宝顾问微信二维码">
-              <img className="wechat-qr" src="/wechat-qr.jpg" alt="天财保宝顾问微信二维码" />
-              <p>扫码添加顾问微信，发送学生年级与当前课程体系。</p>
+              <article className="wechat-card">
+                <img className="wechat-qr" src="/wechat-qr.jpg" alt="天财保宝顾问微信二维码一" />
+                <p>顾问微信 1</p>
+              </article>
+              <article className="wechat-card">
+                <img className="wechat-qr" src="/wechat-qr-second.jpg" alt="天财保宝顾问微信二维码二" />
+                <p>顾问微信 2</p>
+              </article>
+              <p className="wechat-note">任选一位顾问扫码添加，发送学生年级与当前课程体系。</p>
             </div>
           </div>
 
