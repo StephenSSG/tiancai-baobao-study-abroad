@@ -72,10 +72,12 @@ a {
   gap: 24px;
   width: min(1240px, calc(100vw - 28px));
   margin: 12px auto 0;
-  padding: 10px 12px 10px 18px;
-  border: 1px solid rgba(255, 255, 255, 0.68);
+  padding: 9px 12px 9px 14px;
+  border: 1px solid rgba(0, 89, 65, 0.12);
   border-radius: 8px;
-  background: rgba(251, 251, 248, 0.78);
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.9), rgba(244, 249, 246, 0.82)),
+    rgba(251, 251, 248, 0.84);
   box-shadow: 0 18px 50px rgba(18, 22, 21, 0.08);
   backdrop-filter: blur(24px) saturate(1.2);
 }
@@ -83,7 +85,10 @@ a {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
+  padding: 4px 6px 4px 4px;
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.18);
   font-size: 15px;
   font-weight: 800;
   letter-spacing: 0;
@@ -91,15 +96,24 @@ a {
 
 .brand img {
   display: block;
-  width: 154px;
+  width: 136px;
   height: auto;
-  max-height: 44px;
+  max-height: 40px;
   object-fit: contain;
+  filter: saturate(0.9) contrast(0.96);
   mix-blend-mode: multiply;
 }
 
 .brand span {
-  color: var(--hku-green);
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 2px 0 10px;
+  border-left: 1px solid rgba(0, 89, 65, 0.18);
+  color: var(--hku-green-dark);
+  background: transparent;
+  font-size: 14px;
+  line-height: 1;
 }
 
 .nav {
@@ -1317,19 +1331,24 @@ h3 {
   .topbar {
     width: calc(100vw - 20px);
     gap: 8px;
-    padding: 9px 9px 9px 12px;
+    padding: 8px;
   }
 
   .brand {
-    gap: 8px;
+    gap: 7px;
+    padding: 4px 5px 4px 3px;
   }
 
   .brand img {
-    width: 122px;
+    width: 126px;
+    max-height: 36px;
   }
 
   .brand span {
-    max-width: 78px;
+    max-width: 70px;
+    min-height: 26px;
+    padding: 0 0 0 8px;
+    font-size: 13px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
