@@ -58,10 +58,6 @@ const offerCases = [
 
 const campusPhotos = [
   {
-    title: '港大校园现场',
-    image: '/showcase/hku-sign.jpg',
-  },
-  {
     title: 'Chow Yei Ching Building',
     image: '/showcase/hku-window.jpg',
   },
