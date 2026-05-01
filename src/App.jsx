@@ -310,30 +310,41 @@ function App() {
             </p>
           </div>
 
-          <div className="hero-visual" aria-label="港大申请规划校园视觉">
-            <div className="campus-photo-card">
-              <img
-                className="campus-photo"
-                src="/hku-campus-inspired.svg"
-                alt="香港大学风格校园视觉图"
-              />
-              <div className="campus-photo-shade" />
-              <div className="campus-photo-stat" aria-label="香港大学 2026 QS 世界排名第 11">
-                <span>QS 2026</span>
-                <strong>#11</strong>
+          <div className="hero-visual" aria-label="港大申请规划摘要">
+            <div className="planning-panel">
+              <div className="planning-panel-header">
+                <span>HKU Planning System</span>
+                <strong>2026 · QS #11</strong>
               </div>
-              <div className="campus-photo-copy">
-                <span>HKU Undergraduate Pathway</span>
-                <strong>把申请路径，压缩成清晰节点。</strong>
-                <p>以港大本科为目标，贯穿选课、标化、背景、文书与面试。</p>
+
+              <div className="planning-focus">
+                <span>录取目标</span>
+                <strong>香港大学本科录取</strong>
+                <p>围绕选课、成绩、背景、文书与面试，把每一步变成可追踪节点。</p>
               </div>
-              <div className="admission-track photo-track" aria-label="申请规划步骤">
+
+              <div className="admission-track" aria-label="申请规划步骤">
                 {['选课', '标化', '竞赛', '文书', '面试'].map((item, index) => (
                   <div className="track-step" key={item} style={{ '--step-delay': `${index * 130}ms` }}>
                     <span>{String(index + 1).padStart(2, '0')}</span>
                     <p>{item}</p>
                   </div>
                 ))}
+              </div>
+
+              <div className="planning-metrics" aria-label="服务摘要">
+                <div>
+                  <strong>10</strong>
+                  <span>每届限额席位</span>
+                </div>
+                <div>
+                  <strong>5</strong>
+                  <span>核心申请阶段</span>
+                </div>
+                <div>
+                  <strong>月度</strong>
+                  <span>正式复盘会议</span>
+                </div>
               </div>
             </div>
           </div>

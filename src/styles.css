@@ -375,105 +375,100 @@ h3 {
 
 .hero-visual {
   position: relative;
-  min-height: 590px;
+  min-height: 520px;
 }
 
-.campus-photo-card {
+.planning-panel {
   position: relative;
-  min-height: 590px;
+  display: grid;
+  min-height: 520px;
+  align-content: space-between;
+  gap: 28px;
+  padding: clamp(24px, 4vw, 36px);
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 8px;
-  background: #06251e;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.04)),
+    radial-gradient(circle at 78% 12%, rgba(200, 162, 93, 0.18), transparent 32%),
+    radial-gradient(circle at 14% 86%, rgba(157, 34, 53, 0.2), transparent 36%),
+    rgba(255, 255, 255, 0.06);
   box-shadow:
     0 32px 90px rgba(0, 0, 0, 0.34),
     inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(22px);
 }
 
-.campus-photo {
+.planning-panel::before,
+.planning-panel::after {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transform: scale(1.03);
-  animation: photo-drift 12s ease-in-out infinite alternate;
-}
-
-.campus-photo-shade {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(180deg, rgba(0, 28, 22, 0.08) 0%, rgba(0, 20, 16, 0.24) 42%, rgba(0, 12, 10, 0.76) 100%),
-    linear-gradient(90deg, rgba(0, 57, 45, 0.78), transparent 56%),
-    radial-gradient(circle at 78% 18%, rgba(200, 162, 93, 0.2), transparent 34%);
-}
-
-.campus-photo-card::after {
-  position: absolute;
-  inset: 0;
   pointer-events: none;
   content: "";
-  background: linear-gradient(115deg, transparent 0 42%, rgba(255, 255, 255, 0.18) 46%, transparent 51%);
+}
+
+.planning-panel::before {
+  inset: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+}
+
+.planning-panel::after {
+  inset: 0;
+  background: linear-gradient(115deg, transparent 0 42%, rgba(255, 255, 255, 0.12) 46%, transparent 51%);
   transform: translateX(-70%);
-  animation: photo-sheen 6.4s ease-in-out infinite;
+  animation: planning-sheen 6.4s ease-in-out infinite;
 }
 
-.campus-photo-stat {
-  position: absolute;
-  top: 24px;
-  right: 24px;
-  display: grid;
-  justify-items: end;
-  color: #fff;
+.planning-panel-header,
+.planning-focus,
+.admission-track,
+.planning-metrics {
+  position: relative;
+  z-index: 1;
 }
 
-.campus-photo-stat span {
-  color: var(--hku-gold);
-  font-size: 12px;
+.planning-panel-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 13px;
   font-weight: 900;
 }
 
-.campus-photo-stat strong {
-  font-size: clamp(54px, 8vw, 104px);
-  line-height: 0.9;
+.planning-panel-header strong {
+  color: var(--hku-gold);
+  font-size: 13px;
+  text-align: right;
 }
 
-.campus-photo-copy {
-  position: absolute;
-  left: 28px;
-  right: 28px;
-  bottom: 142px;
+.planning-focus {
   display: grid;
-  gap: 8px;
+  gap: 10px;
   max-width: 460px;
   color: #fff;
 }
 
-.campus-photo-copy span {
+.planning-focus span {
   color: var(--hku-gold);
   font-size: 12px;
   font-weight: 900;
   text-transform: uppercase;
 }
 
-.campus-photo-copy strong {
-  font-size: clamp(25px, 4vw, 44px);
+.planning-focus strong {
+  max-width: 420px;
+  font-size: clamp(34px, 5vw, 58px);
   line-height: 1.08;
 }
 
-.campus-photo-copy p {
+.planning-focus p {
+  max-width: 430px;
   margin: 0;
   color: rgba(255, 255, 255, 0.72);
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.65;
-}
-
-.photo-track {
-  position: absolute;
-  left: 28px;
-  right: 28px;
-  bottom: 28px;
 }
 
 .admission-track {
@@ -510,6 +505,36 @@ h3 {
   overflow-wrap: anywhere;
 }
 
+.planning-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.planning-metrics div {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  padding: 16px 14px;
+  background: rgba(0, 20, 16, 0.24);
+}
+
+.planning-metrics strong {
+  color: #fff;
+  font-size: clamp(19px, 3vw, 30px);
+  line-height: 1;
+}
+
+.planning-metrics span {
+  color: rgba(255, 255, 255, 0.64);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
 @keyframes hero-sweep {
   0%,
   100% {
@@ -530,13 +555,7 @@ h3 {
   }
 }
 
-@keyframes photo-drift {
-  100% {
-    transform: scale(1.08) translateX(-1.5%);
-  }
-}
-
-@keyframes photo-sheen {
+@keyframes planning-sheen {
   0%,
   35% {
     transform: translateX(-80%);
@@ -1210,33 +1229,18 @@ h3 {
     min-height: auto;
   }
 
-  .campus-photo-card {
-    min-height: 500px;
-  }
-
-  .campus-photo-stat {
-    top: 18px;
-    right: 18px;
-  }
-
-  .campus-photo-copy {
-    left: 18px;
-    right: 18px;
-    bottom: 106px;
-  }
-
-  .photo-track {
-    left: 18px;
-    right: 18px;
-    bottom: 18px;
+  .planning-panel {
+    min-height: auto;
+    gap: 22px;
+    padding: 22px 18px;
   }
 
   .admission-track {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .photo-track {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+  .planning-focus strong {
+    font-size: 34px;
   }
 
   .track-step {
@@ -1247,6 +1251,18 @@ h3 {
 
   .track-step p {
     font-size: 13px;
+  }
+
+  .planning-metrics {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .planning-metrics div {
+    padding: 12px 8px;
+  }
+
+  .planning-metrics span {
+    font-size: 11px;
   }
 
   .stats-band {
