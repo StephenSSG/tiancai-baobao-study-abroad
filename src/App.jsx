@@ -284,18 +284,6 @@ function App() {
               并以清晰合同约定建立结果保障机制。
             </p>
 
-            <div className="school-kicker" aria-label="目标学校香港大学">
-              <span className="mini-campus" aria-hidden="true">
-                <i />
-                <i />
-                <i />
-              </span>
-              <div>
-                <span>目标学校</span>
-                <strong>香港大学本科</strong>
-              </div>
-            </div>
-
             <div className="refund-banner" aria-label="不成功全额退款保障">
               <span>核心保障</span>
               <strong>不成功全额退款</strong>
@@ -322,36 +310,24 @@ function App() {
             </p>
           </div>
 
-          <div className="hero-visual" aria-label="港大申请规划动态校园视觉">
-            <div className="school-stage">
-              <div className="stage-topline">
-                <span>HKU TARGET SYSTEM</span>
+          <div className="hero-visual" aria-label="港大申请规划校园视觉">
+            <div className="campus-photo-card">
+              <img
+                className="campus-photo"
+                src="/hku-campus-inspired.svg"
+                alt="香港大学风格校园视觉图"
+              />
+              <div className="campus-photo-shade" />
+              <div className="campus-photo-stat" aria-label="香港大学 2026 QS 世界排名第 11">
+                <span>QS 2026</span>
                 <strong>#11</strong>
               </div>
-
-              <div className="campus-scene" aria-hidden="true">
-                <div className="campus-glow" />
-                <div className="campus-silhouette">
-                  <span className="campus-roof" />
-                  <span className="campus-tower" />
-                  <span className="campus-body" />
-                  <span className="campus-column column-1" />
-                  <span className="campus-column column-2" />
-                  <span className="campus-column column-3" />
-                  <span className="campus-column column-4" />
-                  <span className="campus-steps" />
-                </div>
-                <div className="route-line">
-                  <span />
-                </div>
+              <div className="campus-photo-copy">
+                <span>HKU Undergraduate Pathway</span>
+                <strong>把申请路径，压缩成清晰节点。</strong>
+                <p>以港大本科为目标，贯穿选课、标化、背景、文书与面试。</p>
               </div>
-
-              <div className="school-result">
-                <span>目标学校</span>
-                <strong>香港大学本科录取</strong>
-              </div>
-
-              <div className="admission-track" aria-label="申请规划步骤">
+              <div className="admission-track photo-track" aria-label="申请规划步骤">
                 {['选课', '标化', '竞赛', '文书', '面试'].map((item, index) => (
                   <div className="track-step" key={item} style={{ '--step-delay': `${index * 130}ms` }}>
                     <span>{String(index + 1).padStart(2, '0')}</span>
