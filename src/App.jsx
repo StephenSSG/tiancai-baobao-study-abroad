@@ -56,17 +56,6 @@ const offerCases = [
   },
 ];
 
-const campusPhotos = [
-  {
-    title: 'Chow Yei Ching Building',
-    image: '/showcase/hku-window.jpg',
-  },
-  {
-    title: '港大钟楼视角',
-    image: '/showcase/hku-clock.jpg',
-  },
-];
-
 const audience = [
   {
     icon: Target,
@@ -279,8 +268,8 @@ function App() {
     <div className="site-shell">
       <header className="topbar">
         <a className="brand" href="#top" aria-label="天财保宝留学业务首页" onClick={closeMenu}>
-          <span className="brand-mark">天</span>
-          <span>天财保宝 留学业务</span>
+          <img src="/showcase/tiancai-logo-header.jpg" alt="天财保宝" />
+          <span>留学业务</span>
         </a>
 
         <nav className={`nav ${menuOpen ? 'is-open' : ''}`} aria-label="主导航">
@@ -420,15 +409,6 @@ function App() {
                   <p>{item.detail}</p>
                 </div>
               </article>
-            ))}
-          </div>
-
-          <div className="campus-gallery" aria-label="校园现场照片">
-            {campusPhotos.map((photo) => (
-              <figure key={photo.title}>
-                <img src={photo.image} alt={photo.title} />
-                <figcaption>{photo.title}</figcaption>
-              </figure>
             ))}
           </div>
         </section>
