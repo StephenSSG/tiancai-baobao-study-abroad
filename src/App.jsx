@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 
 const navItems = [
+  { label: '录取案例', href: '#offers' },
   { label: '服务路径', href: '#path' },
   { label: '学科导师', href: '#tutors' },
   { label: '结果保障', href: '#guarantee' },
@@ -32,6 +33,42 @@ const stats = [
   { value: '#11', label: '香港大学全球排名' },
   { value: '10', label: '每届限额席位' },
   { value: '5', label: '核心申请阶段' },
+];
+
+const offerCases = [
+  {
+    school: '香港大学',
+    programme: 'Bachelor of Science',
+    detail: 'Firm offer · 2025-26 入学',
+    image: '/showcase/offer-hku-firm.jpg',
+  },
+  {
+    school: '香港大学',
+    programme: 'Bachelor of Science',
+    detail: 'Conditional offer · IB 38+',
+    image: '/showcase/offer-hku-conditional.jpg',
+  },
+  {
+    school: '香港科技大学',
+    programme: 'Science Group A',
+    detail: '含 University Admissions Scholarship',
+    image: '/showcase/offer-hkust.jpg',
+  },
+];
+
+const campusPhotos = [
+  {
+    title: '港大校园现场',
+    image: '/showcase/hku-sign.jpg',
+  },
+  {
+    title: 'Chow Yei Ching Building',
+    image: '/showcase/hku-window.jpg',
+  },
+  {
+    title: '港大钟楼视角',
+    image: '/showcase/hku-clock.jpg',
+  },
 ];
 
 const audience = [
@@ -360,6 +397,44 @@ function App() {
           <p>
             排名信息参考香港大学 Quick Stats 与 QS World University Rankings 2026。
           </p>
+        </section>
+
+        <section className="section-pad proof-section" id="offers">
+          <div className="proof-heading">
+            <div>
+              <img className="proof-logo" src="/showcase/tiancai-logo.jpg" alt="天财保宝" />
+              <p className="eyebrow">Verified outcomes</p>
+              <h2>真实录取材料与校园现场，让承诺有迹可循。</h2>
+            </div>
+            <p>
+              以下为经授权展示的过往录取材料节选，个人信息与申请编号已做隐私处理。录取结果受学生背景、执行情况与当年招生政策影响，最终以院校官方通知为准。
+            </p>
+          </div>
+
+          <div className="offer-grid" aria-label="录取成果案例">
+            {offerCases.map((item) => (
+              <article className="offer-card" key={`${item.school}-${item.detail}`}>
+                <div className="offer-preview">
+                  <img src={item.image} alt={`${item.school} ${item.programme} 录取材料节选`} />
+                  <span>隐私信息已处理</span>
+                </div>
+                <div className="offer-copy">
+                  <span>{item.school}</span>
+                  <strong>{item.programme}</strong>
+                  <p>{item.detail}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div className="campus-gallery" aria-label="校园现场照片">
+            {campusPhotos.map((photo) => (
+              <figure key={photo.title}>
+                <img src={photo.image} alt={photo.title} />
+                <figcaption>{photo.title}</figcaption>
+              </figure>
+            ))}
+          </div>
         </section>
 
         <section className="section-pad" id="fit">
