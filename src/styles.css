@@ -277,6 +277,31 @@ h3 {
   line-height: 1.7;
 }
 
+.scroll-cue {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 18px;
+  color: var(--jade-dark);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.scroll-cue svg {
+  animation: cue-bounce 1.45s ease-in-out infinite;
+}
+
+@keyframes cue-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(5px);
+  }
+}
+
 .hero-visual {
   position: relative;
   min-height: 560px;
@@ -1002,6 +1027,16 @@ h3 {
 
   .hero-actions {
     display: grid;
+  }
+
+  .scroll-cue {
+    justify-content: center;
+    width: 100%;
+    min-height: 48px;
+    margin: 0 0 18px;
+    border: 1px solid rgba(15, 123, 104, 0.2);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.62);
   }
 
   .primary-button,

@@ -300,6 +300,11 @@ function App() {
               </a>
             </div>
 
+            <a className="scroll-cue" href="#stats" aria-label="继续向下了解更多内容">
+              <span>继续了解服务路径</span>
+              <ChevronDown size={18} aria-hidden="true" />
+            </a>
+
             <p className="fine-print">
               结果保障目标为香港大学本科录取；完整服务边界、例外情形与退费规则以正式合同为准。
             </p>
@@ -327,7 +332,7 @@ function App() {
           </div>
         </section>
 
-        <section className="stats-band" aria-label="权威数据">
+        <section className="stats-band" id="stats" aria-label="权威数据">
           {stats.map((item) => (
             <div className="stat" key={item.label}>
               <strong>{item.value}</strong>
